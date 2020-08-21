@@ -1,7 +1,7 @@
 
 # Data Visualization with Matplotlib and Seaborn
 
-Agenda: 
+### Agenda: 
 - Explain what types of graphs best convey specific relationships
 - Use the subplots syntax to create a graph
     - Line
@@ -46,7 +46,7 @@ Peruse some plot examples here for ideas:
 ## Why Visualize Data?
 or why can’t we just hand someone a table of data?
 
-Let's load up the iris data set.  This is a famous built-in dataset which is used to learn about categorization. 
+Let's load up the iris data set.  This is a famous built-in dataset which is used to learn about categorization. There is a lot of code in the cell below which will become much more familiar as we proceed through the course.  For now, just take a glance, but don't worry if it doesn't make sense yet.
 
 
 ```python
@@ -64,11 +64,17 @@ df_iris = pd.DataFrame(data['data'], columns=data['feature_names'])
 df_iris['target'] = data['target']
 ```
 
+    The autoreload extension is already loaded. To reload it, use:
+      %reload_ext autoreload
+
+
 Here is an image of one of the virginica iris, which is unique in its relative petal and sepal length.
 
 ![virginica_iris](iris_virginica.jpg)
 
 ### Dataframe vs Graph: Which do you prefer?
+
+As data scientists, you will look at dataframes everyday.  You will learn how to inspect different aspects of them with the methods associated with the dataframe object.  For example, to get a quick idea of the type of data, we can use the .sample() method.
 
 
 ```python
@@ -106,11 +112,35 @@ df_iris.sample(5)
   </thead>
   <tbody>
     <tr>
-      <th>20</th>
-      <td>5.4</td>
-      <td>3.4</td>
-      <td>1.7</td>
-      <td>0.2</td>
+      <th>32</th>
+      <td>5.2</td>
+      <td>4.1</td>
+      <td>1.5</td>
+      <td>0.1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>52</th>
+      <td>6.9</td>
+      <td>3.1</td>
+      <td>4.9</td>
+      <td>1.5</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>128</th>
+      <td>6.4</td>
+      <td>2.8</td>
+      <td>5.6</td>
+      <td>2.1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>4.3</td>
+      <td>3.0</td>
+      <td>1.1</td>
+      <td>0.1</td>
       <td>0</td>
     </tr>
     <tr>
@@ -121,35 +151,13 @@ df_iris.sample(5)
       <td>1.5</td>
       <td>1</td>
     </tr>
-    <tr>
-      <th>38</th>
-      <td>4.4</td>
-      <td>3.0</td>
-      <td>1.3</td>
-      <td>0.2</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>129</th>
-      <td>7.2</td>
-      <td>3.0</td>
-      <td>5.8</td>
-      <td>1.6</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>54</th>
-      <td>6.5</td>
-      <td>2.8</td>
-      <td>4.6</td>
-      <td>1.5</td>
-      <td>1</td>
-    </tr>
   </tbody>
 </table>
 </div>
 
 
+
+One skill you will develop is the ability to quickly generate visualizations after getting a general sense of the dataframe contents.  Let's plot two of the columns above, sepal length vs petal length. With a glance, we can see new patterns in the data. 
 
 
 ```python
@@ -171,7 +179,7 @@ ax.legend();
 ```
 
 
-![png](index_files/index_17_0.png)
+![png](index_files/index_19_0.png)
 
 
 What information in this graph jumps out to you?
@@ -181,28 +189,28 @@ What information in this graph jumps out to you?
 # your thoughts here
 ```
 
-In your presentation decks, you will no doubt be tempted to print out the head of a data frame, take a screen shot, and plop it in the middle of a slide.  We all have that instinct; the dataframe object will become one your most cherished objects. If you put them in your deck, you will no doubt hear one of us gently request its replacement with some other figure.
+In your **presentation decks**, you will no doubt be tempted to print out the head of a data frame, take a screen shot, and plop it in the middle of a slide.  We all have that instinct; the dataframe object will become one your most cherished objects. If you put them in your deck, you will no doubt hear one of us gently request its replacement with some other figure.
 
 ## The Effectiveness of Visualizations
 
-- People are highly visual and can synthesize visual information such more quickly than rows and columns of numbers 
-- Precognitive understanding of the data
-- Visual representations can be much more viscerally persuasive 
+- People are **highly visual** and can synthesize visual information such more quickly than rows and columns of numbers 
+- **Precognitive** understanding of the data
+- Visual representations can be much more **viscerally persuasive**
 
 ## What Makes an Effective Visualization?
 
-- Each graph should have a clear point it is trying to make. Understanding the insight you are trying to convey will guide the decision making process for what kind of graph will be most effective
+- Each graph should have a **clear poin**t it is trying to make. Understanding the insight you are trying to convey will guide the decision making process for what kind of graph will be most effective
 
-- Know your audience! Come up with a use case and audience to pitch your visualizations
+- Know your **audience**! Come up with a use case and audience to pitch your visualizations
 
-- Choosing the correct graph for the relationship you are trying to communicate
+- Choosing the correct graph for the **relationship** you are trying to communicate
 
-- Label your axes and graph! It should not be difficult for someone to understand what your graph is trying to represent
+- **Label** your axes and graph! It should not be difficult for someone to understand what your graph is trying to represent
 
 - People have unconscious responses to visuals which will effect the way they interpret information. Good visualization makes use of these natural shortcuts in cognition to convey information more efficiently
-        - Red and Down tends to be negative while Green and Up is positive
-        - Lighter hues are seen as lower values and darker is higher values
-        - Axis start at zero
+     - **Red** and Down tends to be negative while **Green** and Up is positive
+     - **Lighter hues** are seen as lower values and darker is higher values
+     - Axis start at **zero**
         
 __Note:__ All of these 'rules' can be broken but know that you will be working against most people's first instinct
 
@@ -232,6 +240,8 @@ _____
 
 # Matplotlib
 
+The matplotlib library will be our foundational visualization tool. Mastering it will allow you to create beautiful graphs quickly.  We can then include these graphs in our README's, final notebooks, and presentation decks. 
+
 <img src="data/matplotlib_anatomy.png">
 
 Explanation of non-obvious terms
@@ -256,27 +266,25 @@ In the plots below, we see different correlations between variables:
 
 
 
+Let's import some NBA data, and use the matplotlib scatter plot to look at correlations.
+
 
 ```python
 import sys
 from src.data_import import player_salaries
 ```
 
+### Is there a correlation between career points/game and average career salary?
 
-```python
-# Allows us to see all of the columns in a dataframe
-pd.set_option('display.max_columns',None)
-```
 
 
 ```python
-# Is there a correlation between career points per game average career salary?
 import numpy as np
 pts_v_salary = player_salaries.groupby('_id').aggregate(np.mean)[['career_PTS', 'salary']]
 avg_pts = pts_v_salary['career_PTS']
 avg_salary = pts_v_salary['salary']
 
-plt.scatter(avg_pts, avg_salary)
+plt.scatter(avg_pts, avg_salary, color='green')
 
 # label the plot below with an appropriate title describing the correlation you see
 plt.title('')
@@ -290,7 +298,7 @@ plt.title('')
 
 
 
-![png](index_files/index_32_1.png)
+![png](index_files/index_36_1.png)
 
 
 As we move into modeling, we will begin talking about the relationship of a target variable and a feature.  If we are predicting salary using a linear model, seeing strong positive correlation suggests that Points Per Game may be an important feature to include in our model.
@@ -310,27 +318,43 @@ pts_v_salary.corr().iloc[0,1]
 
 
 ```python
-# In pairs, explore the data and visualize a negative correlation
+# Let's explore the data and visualize a negative correlation
 ```
+
+### Is there a correlation between height and career assists?
 
 
 ```python
-# Is there a correlation between height and career assits % 
+
 individual_players = player_salaries.drop_duplicates('_id')
 
 height = individual_players['height_inches']
 career_assts = individual_players['career_AST']
 
-plt.scatter(height, career_assts);
+plt.scatter(height, career_assts, color='r');
 ```
 
 
-![png](index_files/index_36_0.png)
+![png](index_files/index_41_0.png)
 
 
 # The graph above is missing a title and labels.  
 Let's work together to add labels using the methods reference in the link below.  
 Reference [this link](https://python-graph-gallery.com/4-add-title-and-axis-label/)
+
+
+```python
+from src.student_caller import one_random_student
+from src.student_list import student_first_names
+```
+
+
+```python
+one_random_student(student_first_names)
+```
+
+    Ozair
+
 
 
 ```python
@@ -343,256 +367,14 @@ plt.tight_layout()
 ```
 
 
-![png](index_files/index_38_0.png)
+![png](index_files/index_45_0.png)
 
 
 We can also change [color](https://matplotlib.org/3.1.0/gallery/color/named_colors.html), opacity, marker size, and [marker symbol](https://matplotlib.org/3.2.1/api/markers_api.html).  
-Below, we have a list of parameters with incorrect values.  Place the values into the correct parameters to create a scatter plot of the correlation between "rooms" and "% lower status of the population" with large blue triangles.
+Below, we have a list of parameters with incorrect values.  Place the values into the correct parameters to create a scatter plot of the correlation between "height" and "assists" with large red triangles sized according to player salary.
 
-# Group Discussion:
-Have a conversation with your partners and decide how to rearrange the variables into the correct pattern
-
-
-```python
-player_salaries.head()
-```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>_id</th>
-      <th>birthDate</th>
-      <th>birthPlace</th>
-      <th>career_AST</th>
-      <th>career_FG%</th>
-      <th>career_FG3%</th>
-      <th>career_FT%</th>
-      <th>career_G</th>
-      <th>career_PER</th>
-      <th>career_PTS</th>
-      <th>career_TRB</th>
-      <th>career_WS</th>
-      <th>career_eFG%</th>
-      <th>college</th>
-      <th>draft_pick</th>
-      <th>draft_round</th>
-      <th>draft_team</th>
-      <th>draft_year</th>
-      <th>height</th>
-      <th>highSchool</th>
-      <th>name</th>
-      <th>position</th>
-      <th>shoots</th>
-      <th>weight</th>
-      <th>height_inches</th>
-      <th>league</th>
-      <th>player_id</th>
-      <th>salary</th>
-      <th>season</th>
-      <th>season_end</th>
-      <th>season_start</th>
-      <th>team</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>abdelal01</td>
-      <td>June 24, 1968</td>
-      <td>Cairo, Egypt</td>
-      <td>0.3</td>
-      <td>50.2</td>
-      <td>0.0</td>
-      <td>70.1</td>
-      <td>256</td>
-      <td>13.0</td>
-      <td>5.7</td>
-      <td>3.3</td>
-      <td>4.8</td>
-      <td>50.2</td>
-      <td>Duke University</td>
-      <td>25th overall</td>
-      <td>1st round</td>
-      <td>Portland Trail Blazers</td>
-      <td>1990</td>
-      <td>6-10</td>
-      <td>Bloomfield in Bloomfield, New Jersey</td>
-      <td>Alaa Abdelnaby</td>
-      <td>Power Forward</td>
-      <td>Right</td>
-      <td>240lb</td>
-      <td>82</td>
-      <td>NBA</td>
-      <td>abdelal01</td>
-      <td>395000</td>
-      <td>1990-91</td>
-      <td>1991</td>
-      <td>1990</td>
-      <td>Portland Trail Blazers</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>abdelal01</td>
-      <td>June 24, 1968</td>
-      <td>Cairo, Egypt</td>
-      <td>0.3</td>
-      <td>50.2</td>
-      <td>0.0</td>
-      <td>70.1</td>
-      <td>256</td>
-      <td>13.0</td>
-      <td>5.7</td>
-      <td>3.3</td>
-      <td>4.8</td>
-      <td>50.2</td>
-      <td>Duke University</td>
-      <td>25th overall</td>
-      <td>1st round</td>
-      <td>Portland Trail Blazers</td>
-      <td>1990</td>
-      <td>6-10</td>
-      <td>Bloomfield in Bloomfield, New Jersey</td>
-      <td>Alaa Abdelnaby</td>
-      <td>Power Forward</td>
-      <td>Right</td>
-      <td>240lb</td>
-      <td>82</td>
-      <td>NBA</td>
-      <td>abdelal01</td>
-      <td>494000</td>
-      <td>1991-92</td>
-      <td>1992</td>
-      <td>1991</td>
-      <td>Portland Trail Blazers</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>abdelal01</td>
-      <td>June 24, 1968</td>
-      <td>Cairo, Egypt</td>
-      <td>0.3</td>
-      <td>50.2</td>
-      <td>0.0</td>
-      <td>70.1</td>
-      <td>256</td>
-      <td>13.0</td>
-      <td>5.7</td>
-      <td>3.3</td>
-      <td>4.8</td>
-      <td>50.2</td>
-      <td>Duke University</td>
-      <td>25th overall</td>
-      <td>1st round</td>
-      <td>Portland Trail Blazers</td>
-      <td>1990</td>
-      <td>6-10</td>
-      <td>Bloomfield in Bloomfield, New Jersey</td>
-      <td>Alaa Abdelnaby</td>
-      <td>Power Forward</td>
-      <td>Right</td>
-      <td>240lb</td>
-      <td>82</td>
-      <td>NBA</td>
-      <td>abdelal01</td>
-      <td>500000</td>
-      <td>1992-93</td>
-      <td>1993</td>
-      <td>1992</td>
-      <td>Boston Celtics</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>abdelal01</td>
-      <td>June 24, 1968</td>
-      <td>Cairo, Egypt</td>
-      <td>0.3</td>
-      <td>50.2</td>
-      <td>0.0</td>
-      <td>70.1</td>
-      <td>256</td>
-      <td>13.0</td>
-      <td>5.7</td>
-      <td>3.3</td>
-      <td>4.8</td>
-      <td>50.2</td>
-      <td>Duke University</td>
-      <td>25th overall</td>
-      <td>1st round</td>
-      <td>Portland Trail Blazers</td>
-      <td>1990</td>
-      <td>6-10</td>
-      <td>Bloomfield in Bloomfield, New Jersey</td>
-      <td>Alaa Abdelnaby</td>
-      <td>Power Forward</td>
-      <td>Right</td>
-      <td>240lb</td>
-      <td>82</td>
-      <td>NBA</td>
-      <td>abdelal01</td>
-      <td>805000</td>
-      <td>1993-94</td>
-      <td>1994</td>
-      <td>1993</td>
-      <td>Boston Celtics</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>abdelal01</td>
-      <td>June 24, 1968</td>
-      <td>Cairo, Egypt</td>
-      <td>0.3</td>
-      <td>50.2</td>
-      <td>0.0</td>
-      <td>70.1</td>
-      <td>256</td>
-      <td>13.0</td>
-      <td>5.7</td>
-      <td>3.3</td>
-      <td>4.8</td>
-      <td>50.2</td>
-      <td>Duke University</td>
-      <td>25th overall</td>
-      <td>1st round</td>
-      <td>Portland Trail Blazers</td>
-      <td>1990</td>
-      <td>6-10</td>
-      <td>Bloomfield in Bloomfield, New Jersey</td>
-      <td>Alaa Abdelnaby</td>
-      <td>Power Forward</td>
-      <td>Right</td>
-      <td>240lb</td>
-      <td>82</td>
-      <td>NBA</td>
-      <td>abdelal01</td>
-      <td>650000</td>
-      <td>1994-95</td>
-      <td>1995</td>
-      <td>1994</td>
-      <td>Sacramento Kings</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
+# Pair Programming: 5 minutes
+Have a conversation with your partners and decide how to rearrange the variables into the correct pattern. Don't forget the labels.
 
 
 ```python
@@ -609,19 +391,11 @@ plt.scatter(x= , y=, alpha=, c=, marker=, s=)
 ```
 
 
-    ---------------------------------------------------------------------------
+      File "<ipython-input-174-1757d9a271e1>", line 10
+        plt.scatter(x= , y=, alpha=, c=, marker=, s=)
+                       ^
+    SyntaxError: invalid syntax
 
-    TypeError                                 Traceback (most recent call last)
-
-    <ipython-input-21-fad0653f7907> in <module>
-    ----> 1 plt.scatter()
-          2 c = boston_df.RM
-          3 marker = 100
-          4 x=.5
-          5 alpha = 'blue'
-
-
-    TypeError: scatter() missing 2 required positional arguments: 'x' and 'y'
 
 
 
@@ -631,7 +405,7 @@ plt.scatter(x= , y=, alpha=, c=, marker=, s=)
 a = height
 b = 100
 c = .2 
-d = 'green'
+d = 'red'
 e = 'pink' 
 f = '^'
 g = career_assts
@@ -644,17 +418,17 @@ plt.scatter(x=a , y=g, alpha=c, c=d, marker=f, s=h)
 
 
 
-    <matplotlib.collections.PathCollection at 0x1a29fc54e0>
+    <matplotlib.collections.PathCollection at 0x1a3ef5cb00>
 
 
 
 
-![png](index_files/index_43_1.png)
+![png](index_files/index_49_1.png)
 
 
 ## Line Plot
 
-Tracks the change of a single variable over time.  They are generally better than bar graphs over shorter periods of time.
+Tracks the change of a single variable over time.  They are generally better than bar graphs over shorter periods of time.  They will become especially useful when we look into time series.
 
 Here is some code to read in some well worn shampoo sales data over a three year period.
 
@@ -741,7 +515,7 @@ plt.ylabel('Total Sales')
 
 
 
-![png](index_files/index_46_1.png)
+![png](index_files/index_52_1.png)
 
 
 ## The xticks are illegible in the plot above.
@@ -756,22 +530,17 @@ While you're at it, change the [linestyle](https://matplotlib.org/3.1.0/gallery/
 
 ```python
 # Update the code below to rotate the xticks
+
 plt.plot(shampoo.Month, shampoo.iloc[:,1], color='g')
 plt.title('Shampoo Sales Across 3 Years')
 plt.xlabel('Year')
 plt.ylabel('Total Sales')
+plt.xticks(rotation=90);
 
 ```
 
 
-
-
-    Text(0, 0.5, 'Total Sales')
-
-
-
-
-![png](index_files/index_49_1.png)
+![png](index_files/index_55_0.png)
 
 
 # Pair Programming # 1
@@ -779,10 +548,74 @@ Now, in groups of 2, take 3 minutes to see if you can do better. Look into the x
 
 This can be tricky.  Don't get discouraged if you can't get it.
 
+**hint** here are then indexes for the xticks
+
+
+```python
+shampoo.Month
+```
+
+
+
+
+    0     1-01
+    1     1-02
+    2     1-03
+    3     1-04
+    4     1-05
+    5     1-06
+    6     1-07
+    7     1-08
+    8     1-09
+    9     1-10
+    10    1-11
+    11    1-12
+    12    2-01
+    13    2-02
+    14    2-03
+    15    2-04
+    16    2-05
+    17    2-06
+    18    2-07
+    19    2-08
+    20    2-09
+    21    2-10
+    22    2-11
+    23    2-12
+    24    3-01
+    25    3-02
+    26    3-03
+    27    3-04
+    28    3-05
+    29    3-06
+    30    3-07
+    31    3-08
+    32    3-09
+    33    3-10
+    34    3-11
+    35    3-12
+    Name: Month, dtype: object
+
+
+
 
 ```python
 # Your code here
 ```
+
+
+```python
+#__SOLUTION__
+plt.plot(shampoo.Month, shampoo.iloc[:,1], color='g')
+plt.title('Shampoo Sales Across 3 Years')
+plt.xlabel('Year')
+plt.ylabel('Total Sales')
+plt.xticks([13,25], ['Jan: Yr 2', 'Jan: Yr 3'], rotation=45);
+```
+
+
+![png](index_files/index_59_0.png)
+
 
 ## Bar charts
 
@@ -909,7 +742,7 @@ plt.tight_layout()
 ```
 
 
-![png](index_files/index_54_0.png)
+![png](index_files/index_62_0.png)
 
 
 The plot about is small. Adjust the figure size to make it bigger.
@@ -935,7 +768,7 @@ rectangles[2].set_color('r')
 ```
 
 
-![png](index_files/index_57_0.png)
+![png](index_files/index_65_0.png)
 
 
 ## Histograms
@@ -952,24 +785,10 @@ Histograms are often confused with bar charts, since they look somewhat similar.
 
 
 ```python
-divy_bikes_url = 'https://divvy-tripdata.s3.amazonaws.com/Divvy_Trips_2020_Q1.zip'
-```
-
-
-```python
-! curl https://divvy-tripdata.s3.amazonaws.com/Divvy_Trips_2020_Q1.zip -o 'data/divy_2020_Q1.zip'
-! unzip data/divy_2020_Q1.zip -d data
+# ! curl https://divvy-tripdata.s3.amazonaws.com/Divvy_Trips_2020_Q1.zip -o 'data/divy_2020_Q1.zip'
+# ! unzip data/divy_2020_Q1.zip -d data
 
 ```
-
-      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                     Dload  Upload   Total   Spent    Left  Speed
-    100 15.1M  100 15.1M    0     0  2806k      0  0:00:05  0:00:05 --:--:-- 2702k
-    Archive:  data/divy_2020_Q1.zip
-      inflating: data/Divvy_Trips_2020_Q1.csv  
-       creating: data/__MACOSX/
-      inflating: data/__MACOSX/._Divvy_Trips_2020_Q1.csv  
-
 
 
 ```python
@@ -1135,7 +954,7 @@ plt.title('Ride Count Per Hour on Weekdays');
 ```
 
 
-![png](index_files/index_67_0.png)
+![png](index_files/index_74_0.png)
 
 
 
@@ -1150,7 +969,7 @@ plt.title('Ride Count Per Hour on Weekends');
 ```
 
 
-![png](index_files/index_68_0.png)
+![png](index_files/index_75_0.png)
 
 
 ## Layering
@@ -1177,7 +996,7 @@ plt.legend();
 
 
 
-![png](index_files/index_71_1.png)
+![png](index_files/index_78_1.png)
 
 
 ## Box Plots
@@ -1214,12 +1033,16 @@ plt.ylabel("Housing Price ($1000s)");
 ```
 
 
-![png](index_files/index_75_0.png)
+![png](index_files/index_82_0.png)
 
 
 ## Plotting Syntax
 
-- There are many different ways to create plots but we will strongly suggest using the subplots method
+- There are many different ways to create plots but we will strongly suggest using the subplots method  
+```fig, ax = plt.subplots()```  
+```fig, (ax_1, ax_2) = plt.subplots(1,2)```
+
+
     - This is useful for extensibility 
     - Gives you access to the figure and individual axis in a plot
     - More fine grained control of customizing your plot
@@ -1233,6 +1056,19 @@ plt.ylabel("Housing Price ($1000s)");
 Here are links to the [matplotlib documentation](https://matplotlib.org/index.html) as well as the [Axes object documentation](https://matplotlib.org/api/axes_api.html):
 
 We will now walk through some common charts and their uses, while practicing our matplotlib syntax
+
+
+```python
+fig, ax = plt.subplots()
+ax.boxplot(house_prices)
+
+# The syntax is a bit different
+ax.set_ylabel("Housing Price ($1000s)");
+```
+
+
+![png](index_files/index_85_0.png)
+
 
 # Pair Programming 2:
 
@@ -1250,12 +1086,12 @@ fig, () = plt.subplots(1,2)
 set_figheight(7)
 set_figwidth(10)
 
-boxplot(sales_price)
+boxplot(house_prices)
 set_xlabel('House Price ($1000s)');
 set_ylabel('Count')
 set_title('Many Outliers in Boston House Prices')
 
-hist(sales_price)
+hist(house_prices)
 set_ylabel('Count')
 set_title('Distribution of Boston House Prices')
 
@@ -1268,48 +1104,51 @@ plt.tight_layout()
 
     ValueError                                Traceback (most recent call last)
 
-    <ipython-input-62-620c6d146ffd> in <module>
+    <ipython-input-197-55d79241047d> in <module>
     ----> 1 fig, () = plt.subplots(1,2)
           2 set_figheight(7)
           3 set_figwidth(10)
           4 
-          5 boxplot(sales_price)
+          5 boxplot(house_prices)
 
 
     ValueError: too many values to unpack (expected 0)
 
 
 
-![png](index_files/index_79_1.png)
+![png](index_files/index_87_1.png)
 
-
-## Pie Charts
-Love em or hate em, you'll no doubt see em.
-One spend much time on them, but know you can use matplotlib to plot them.
-They show relative sizes of subgroups of our data.
 
 
 ```python
-fig, ax = plt.subplots()
-ax.pie(df_iris['target'].value_counts(), labels = list(data['target_names']), autopct='%1.0f%%');
+#__SOLUTION__
+fig, (ax_1, ax_2) = plt.subplots(1,2)
+fig.set_figheight(7)
+fig.set_figwidth(10)
 
-ax.set_title('Target Distribution of Iris Dataset')
+ax_1.boxplot(house_prices)
+ax_1.set_xlabel('House Price ($1000s)');
+ax_1.set_ylabel('Count')
+ax_1.set_title('Many Outliers in Boston House Prices')
+
+ax_2.hist(house_prices)
+ax_2.set_ylabel('Count')
+ax_2.set_title('Distribution of Boston House Prices')
+
 plt.tight_layout()
-
+;
 ```
 
 
-```python
-fig, ax = plt.subplots()
-for group in shampoo.groupby('year').groups:
-    x = shampoo.groupby('year').get_group(group)
-    ax.plot(x.month, x.iloc[:,1], )
-    
-ax.set_title('Lineplot of Shampoo Sales\n Over Three Years')
-ax.legend(['year_1', 'year_2', 'year_3'])
-ax.set_xlabel('Month')
-ax.set_ylabel('Shampoo Sales')
-```
+
+
+    ''
+
+
+
+
+![png](index_files/index_88_1.png)
+
 
 ### Quick note: style sheets are cool
 
@@ -1337,14 +1176,13 @@ for group in shampoo.groupby('year').groups:
 ax.legend(['year_1', 'year_2', 'year_3'])
 ax.set_xlabel('Month')
 ax.set_ylabel('Shampoo Sales')
-
+plt.show()
 # plt.savefig('path_to_figure_folder/.svg')
 ```
 
 
-```python
+![png](index_files/index_93_0.png)
 
-```
 
 # Seaborn
 
@@ -1371,106 +1209,128 @@ from scipy import stats
 sns.set(style='whitegrid')
 fig, ax = plt.subplots()
 
-X = np.linspace(-3, 3, 100)
-y = X**2
-ax.plot(X, y);
+X = height
+y = career_assts
+sns.scatterplot(X, y);
 ```
 
-## Adding Text
+
+![png](index_files/index_96_0.png)
+
 
 
 ```python
-fig, ax = plt.subplots()
-
-X = np.linspace(-3, 3, 100)
-y = X**2
-ax.plot(X, y)
-ax.text(s='random comment', x=0, y=3)
-ax.annotate(s='minimum!', xy=(0, 0), xytext=(1, -4),
-           arrowprops={'facecolor': 'black'});
+sns.regplot(X, y);
 ```
 
-## Scatter Plot
 
+![png](index_files/index_97_0.png)
 
-```python
-fig, ax = plt.subplots()
-
-x, y = np.random.randn(2, 300)
-
-# With Seaborn we can still use the subplots syntax by passing our
-# axis object into the graphing function
-
-sns.scatterplot(x, y, ax=ax)
-ax.set_ylabel('Cars')
-ax.set_xlabel('Number of Office Chairs');
-```
 
 ## Violin Plot
 
 
 ```python
-tips = sns.load_dataset("tips")
 
 fig, ax = plt.subplots()
 
-sns.violinplot(data=tips, x="day", y="total_bill");
+sns.violinplot(data=house_prices)
+ax.set_ylabel('House Price in 1000s');
 ```
+
+
+![png](index_files/index_99_0.png)
+
 
 ## Kernel Density Estimation Plot
 
 
 ```python
-sample = stats.norm.rvs(size=200)
+sns.kdeplot(weekday_divy['hour'], shade=True);
+```
 
-sns.kdeplot(sample);
+
+![png](index_files/index_101_0.png)
+
+
+
+```python
+basketball_corr = individual_players[['salary', 'height_inches', 'career_AST', 'career_FG3%']]
+
 ```
 
 
 ```python
-sns.kdeplot(sample, bw=0.1);
+# Pair plot
+sns.pairplot(basketball_corr)
 ```
+
+
+
+
+    <seaborn.axisgrid.PairGrid at 0x1a2c1d6e48>
+
+
+
+
+![png](index_files/index_103_1.png)
+
 
 
 ```python
-sns.kdeplot(sample, bw=0.01, kernel='epa');
+basketball_corr.corr()
 ```
 
 
-```python
-sns.distplot(sample);
-```
-
-Use another seaborn ploting method to explore the dataset!
 
 
-```python
-# Your code here
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>salary</th>
+      <th>height_inches</th>
+      <th>career_AST</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>salary</th>
+      <td>1.000000</td>
+      <td>0.138771</td>
+      <td>0.227794</td>
+    </tr>
+    <tr>
+      <th>height_inches</th>
+      <td>0.138771</td>
+      <td>1.000000</td>
+      <td>-0.500143</td>
+    </tr>
+    <tr>
+      <th>career_AST</th>
+      <td>0.227794</td>
+      <td>-0.500143</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 
-```
-
-## Seaborn Datasets
-
-
-```python
-sns.get_dataset_names()
-```
-
-
-```python
-ans = sns.load_dataset('anscombe')
-ans.head()
-```
-
-
-```python
-fig, ax = plt.subplots()
-ax.scatter(ans['x'], ans['y'], c=ans['dataset'].map({'I': 1,
-                                                     'II': 2,
-                                                     'III': 3,
-                                                     'IV': 4}));
-```
 
 
 ```python
