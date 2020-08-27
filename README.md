@@ -10,9 +10,11 @@
     - Hist
 - Customize different aspects of a graph
     - labels (title, axis)
-    - Linestyle 
+    - Markers
     - Colors
+    - Hues
 - Create multiple graphs in one figure
+    - Explore fig, ax = plt.subplots() syntax
 
 
 # Activation Exercise
@@ -56,17 +58,13 @@ import matplotlib.pyplot as plt
 %load_ext autoreload
 %autoreload 2
 # Two well worn data sets
-from sklearn.datasets import load_iris, load_wine
+from sklearn.datasets import load_iris
 import pandas as pd
 
 data = load_iris()
 df_iris = pd.DataFrame(data['data'], columns=data['feature_names'])
 df_iris['target'] = data['target']
 ```
-
-    The autoreload extension is already loaded. To reload it, use:
-      %reload_ext autoreload
-
 
 Here is an image of one of the virginica iris, which is unique in its relative petal and sepal length.
 
@@ -81,81 +79,6 @@ As data scientists, you will look at dataframes everyday.  You will learn how to
 # I like to use sample rather than head because it gives me a better idea of the distribution of observations
 df_iris.sample(5)
 ```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>sepal length (cm)</th>
-      <th>sepal width (cm)</th>
-      <th>petal length (cm)</th>
-      <th>petal width (cm)</th>
-      <th>target</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>32</th>
-      <td>5.2</td>
-      <td>4.1</td>
-      <td>1.5</td>
-      <td>0.1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>52</th>
-      <td>6.9</td>
-      <td>3.1</td>
-      <td>4.9</td>
-      <td>1.5</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>128</th>
-      <td>6.4</td>
-      <td>2.8</td>
-      <td>5.6</td>
-      <td>2.1</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>4.3</td>
-      <td>3.0</td>
-      <td>1.1</td>
-      <td>0.1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>72</th>
-      <td>6.3</td>
-      <td>2.5</td>
-      <td>4.9</td>
-      <td>1.5</td>
-      <td>1</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
 
 One skill you will develop is the ability to quickly generate visualizations after getting a general sense of the dataframe contents.  Let's plot two of the columns above, sepal length vs petal length. With a glance, we can see new patterns in the data. 
 
@@ -177,10 +100,6 @@ ax.set_xlabel('sepal length (cm)')
 ax.set_title('Petal length vs Sepal Length for Three Species of Flowers')
 ax.legend();
 ```
-
-
-![png](index_files/index_19_0.png)
-
 
 What information in this graph jumps out to you?
 
@@ -271,6 +190,8 @@ Let's import some NBA data, and use the matplotlib scatter plot to look at corre
 
 ```python
 import sys
+from src.student_list import student_first_names
+from src.student_caller import three_random_students, one_random_student
 from src.data_import import player_salaries
 ```
 
@@ -281,122 +202,68 @@ from src.data_import import player_salaries
 ```python
 import numpy as np
 pts_v_salary = player_salaries.groupby('_id').aggregate(np.mean)[['career_PTS', 'salary']]
+
+# We need to pass in array like objects to our plot
 avg_pts = pts_v_salary['career_PTS']
 avg_salary = pts_v_salary['salary']
 
-plt.scatter(avg_pts, avg_salary, color='green')
-
-# label the plot below with an appropriate title describing the correlation you see
-plt.title('')
 ```
 
 
+```python
+# Your code here
+
+# let's make the color green to indicate positive correlation
+
+# Don't forget to add axis labels and titles
+
+```
 
 
-    Text(0.5, 1.0, '')
+```python
+# I am going to alter one of the arrays by adding [1:] to the end of the script. 
+# When I run the code, there will be an error
+
+```
+
+Of the three students below, someone volunteer to read and interpret the error message.
 
 
+```python
 
-
-![png](index_files/index_36_1.png)
-
+three_random_students(student_first_names)
+```
 
 As we move into modeling, we will begin talking about the relationship of a target variable and a feature.  If we are predicting salary using a linear model, seeing strong positive correlation suggests that Points Per Game may be an important feature to include in our model.
 
-
-```python
-# We can even put f-strings in titles: 
-pts_v_salary.corr().iloc[0,1]
-```
-
-
-
-
-    0.6416397500759979
-
-
-
-
-```python
-# Let's explore the data and visualize a negative correlation
-```
+# Pair Program: Let's explore the data and visualize a negative correlation
 
 ### Is there a correlation between height and career assists?
 
+Take 7 minutes to plot the correlation between heigh and career assists.  The arrays are coded below.
+
+Get through as many of the tasks below as possible:
+
+  1. Plot a scatter plot visualizing the correlation of career assists and height.
+  2. Add an xlabel, ylabel, and title
+  3. Change the color to red
+  4. change the marker type to a '^'
+  5. Set the opacity to .2
+  6. Set the size of each marker to individual_players['salary']/20000
+  7. Using an f-string, add the magnetude of correlation to the plot. 
+  Code for correlation: `round(np.corrcoef(height, career_assts)[0,1], 4)`
+
+Remember you can view the documentation of scatter by placing your cursor between the parens and hitting shift-tab
+
 
 ```python
-
 individual_players = player_salaries.drop_duplicates('_id')
 
 height = individual_players['height_inches']
-career_assts = individual_players['career_AST']
+career_assists = individual_players['career_AST']
 
-plt.scatter(height, career_assts, color='r');
+
 ```
-
-
-![png](index_files/index_41_0.png)
-
-
-# The graph above is missing a title and labels.  
-Let's work together to add labels using the methods reference in the link below.  
-Reference [this link](https://python-graph-gallery.com/4-add-title-and-axis-label/)
-
-
-```python
-from src.student_caller import one_random_student
-from src.student_list import student_first_names
-```
-
-
-```python
-one_random_student(student_first_names)
-```
-
-    Ozair
-
-
-
-```python
-plt.scatter(height, career_assts);
-x_label = 'Height (in)'
-y_label = 'Career Assists/Game'
-title = 'Assists/Game Over a Player\'s Career\nis Negatively Correlated to Height '
-
-plt.tight_layout()
-```
-
-
-![png](index_files/index_45_0.png)
-
-
-We can also change [color](https://matplotlib.org/3.1.0/gallery/color/named_colors.html), opacity, marker size, and [marker symbol](https://matplotlib.org/3.2.1/api/markers_api.html).  
-Below, we have a list of parameters with incorrect values.  Place the values into the correct parameters to create a scatter plot of the correlation between "height" and "assists" with large red triangles sized according to player salary.
-
-# Pair Programming: 5 minutes
-Have a conversation with your partners and decide how to rearrange the variables into the correct pattern. Don't forget the labels.
-
-
-```python
-a = height
-b = 100
-c = .2 
-d = 'green'
-e = 'pink' 
-f = '^'
-g = career_assts
-h = individual_players['salary']/20000
-
-plt.scatter(x= , y=, alpha=, c=, marker=, s=)
-```
-
-
-      File "<ipython-input-174-1757d9a271e1>", line 10
-        plt.scatter(x= , y=, alpha=, c=, marker=, s=)
-                       ^
-    SyntaxError: invalid syntax
-
-
 
 ## Line Plot
 
@@ -415,165 +282,59 @@ shampoo.head()
 ```
 
 
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Month</th>
-      <th>Sales of shampoo over a three year period</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1-01</td>
-      <td>266.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1-02</td>
-      <td>145.9</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1-03</td>
-      <td>183.1</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1-04</td>
-      <td>119.3</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1-05</td>
-      <td>180.3</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
 ```python
-plt.plot(shampoo.Month, shampoo.iloc[:,1], color='g')
+dates = shampoo.Month
+sales = shampoo.iloc[:,1]
+
+plt.plot(dates, sales, color='g')
 plt.title('Shampoo Sales Across 3 Years')
 plt.xlabel('Year')
 plt.ylabel('Total Sales')
 ```
 
+The above plot shows an upward trend of sales across the years, and perhaps we can also see an increase in variance as well.
 
+That is a clear takeaway, but the x-axis is very messy.  
 
+Let's fix that together. 
 
-    Text(0, 0.5, 'Total Sales')
-
-
-
-
-![png](index_files/index_51_1.png)
-
-
-## The xticks are illegible in the plot above.
-
-
-
-One way to combat that is to try rotating the ticks.  
-Use [this documentation](https://matplotlib.org/3.1.1/gallery/ticks_and_spines/ticklabels_rotation.html) to learn how to rotate.
-
-While you're at it, change the [linestyle](https://matplotlib.org/3.1.0/gallery/lines_bars_and_markers/linestyles.html).
-
-
-```python
-# Update the code below to rotate the xticks
-
-plt.plot(shampoo.Month, shampoo.iloc[:,1], color='g')
-plt.title('Shampoo Sales Across 3 Years')
-plt.xlabel('Year')
-plt.ylabel('Total Sales')
-plt.xticks(rotation=90);
-
-```
-
-
-![png](index_files/index_54_0.png)
-
-
-# Pair Programming # 1
-Now, in groups of 2, take 3 minutes to see if you can do better. Look into the xticks documentation further. Try to reduce the number of ticks to increase visability
-
-This can be tricky.  Don't get discouraged if you can't get it.
-
-**hint** here are then indexes for the xticks
-
-
-```python
-shampoo.Month
-```
-
-
-
-
-    0     1-01
-    1     1-02
-    2     1-03
-    3     1-04
-    4     1-05
-    5     1-06
-    6     1-07
-    7     1-08
-    8     1-09
-    9     1-10
-    10    1-11
-    11    1-12
-    12    2-01
-    13    2-02
-    14    2-03
-    15    2-04
-    16    2-05
-    17    2-06
-    18    2-07
-    19    2-08
-    20    2-09
-    21    2-10
-    22    2-11
-    23    2-12
-    24    3-01
-    25    3-02
-    26    3-03
-    27    3-04
-    28    3-05
-    29    3-06
-    30    3-07
-    31    3-08
-    32    3-09
-    33    3-10
-    34    3-11
-    35    3-12
-    Name: Month, dtype: object
-
-
+Here is the relevant [documentation](https://matplotlib.org/3.1.1/gallery/ticks_and_spines/ticklabels_rotation.html) to learn how to rotate xticks.
 
 
 ```python
 # Your code here
 ```
+
+
+```python
+# That is still messy.  Let's reduce the number of ticks. To do so, we indicate which indices to include ticks
+# and pass those indices to plt.xticks()
+shampoo.Month
+```
+
+## Plotting Syntax
+
+Above, we used the plt.scatter()/plt.plot() syntax to make our graphs.  That was to ease us into a general comfort with matplotlib.  But there is a better way.
+
+- There are many different ways to create plots but we will strongly suggest using the subplots method  
+```fig, ax = plt.subplots()```  
+```fig, (ax_1, ax_2) = plt.subplots(1,2)```
+
+    - This is useful for extensibility 
+    - Gives you access to the figure and individual axis in a plot
+    - More fine grained control of customizing your plot
+    - Easily create additional axis on your figure
+    - This syntax is a good level of abstraction
+        - You can go deeper into the api but this should give you immediate access to most tools you will need for whatever plot you are making
+    - Flatiron Specific
+        - Plotting code will be more easily readable for other students and instructors
+        - You don’t need to remember many different ways to organize your code
+
+Here are links to the [matplotlib documentation](https://matplotlib.org/index.html) as well as the [Axes object documentation](https://matplotlib.org/api/axes_api.html):
+
+
+
+From now on, I will use the plt.subplots() syntax, beginning with our barplots.
 
 ## Bar charts
 
@@ -581,6 +342,7 @@ Bar charts are everywhere: powerpoints, billboards and the evening news. They ar
 
 For example, a bar chart can show the growth of a single categorical variable across time.
 
+Let's sum the sales by month over the three years, and see if there is any monthly seasonality.
 
 
 
@@ -598,140 +360,27 @@ def get_month(date):
     return date[2:]
 
 shampoo['month'] = shampoo['Month'].apply(get_month)
-total_sales_per_month = shampoo.groupby('month').sum().sort_values(by='month')
-months = ['January', 'February', 'March', 'April', 
+total_sales_per_month = shampoo.groupby('month').sum()
+
+sales_per_month = list(total_sales_per_month.values.flatten())
+month_numbers = total_sales_per_month.index
+
+months_labels = ['January', 'February', 'March', 'April', 
          'May', 'June', 'July', 'August', 'September', 
          'October', 'November', 'December']
 total_sales_per_month
 ```
 
 
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Sales of shampoo over a three year period</th>
-    </tr>
-    <tr>
-      <th>month</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>01</th>
-      <td>800.0</td>
-    </tr>
-    <tr>
-      <th>02</th>
-      <td>735.8</td>
-    </tr>
-    <tr>
-      <th>03</th>
-      <td>709.1</td>
-    </tr>
-    <tr>
-      <th>04</th>
-      <td>831.9</td>
-    </tr>
-    <tr>
-      <th>05</th>
-      <td>773.0</td>
-    </tr>
-    <tr>
-      <th>06</th>
-      <td>892.9</td>
-    </tr>
-    <tr>
-      <th>07</th>
-      <td>1033.3</td>
-    </tr>
-    <tr>
-      <th>08</th>
-      <td>935.7</td>
-    </tr>
-    <tr>
-      <th>09</th>
-      <td>1164.7</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>1019.8</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>1182.3</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>1175.1</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
 ```python
-plt.bar(x = list(total_sales_per_month.index), height=total_sales_per_month.values.flatten())
-plt.xticks(ticks = range(0,12), labels=months)
-plt.xticks(rotation=45)
-plt.title('Total shampoo sales per month')
-plt.xlabel('Total Sales')
-plt.ylabel('Month')
-plt.tight_layout()
+# The fig, ax syntax can be hard to remember for a few tasks, such as rotating the xticks, so I'll include the code here
+# ax.set_xticklabels(labels=months_labels, rotation=45)
+fig, ax = plt.subplots()
 ```
-
-
-![png](index_files/index_60_0.png)
-
-
-The plot about is small. Adjust the figure size to make it bigger.
-Look at [this link](https://stackoverflow.com/questions/332289/how-do-you-change-the-size-of-figures-drawn-with-matplotlib)
-
-
-```python
-# Your code here
-```
-
-
-```python
-# With barplots, we can also interact with indiividual rectangles.
-
-rectangles = plt.bar(x = list(total_sales_per_month.index), height=total_sales_per_month.values.flatten())
-plt.xticks(ticks = range(0,12), labels=months)
-plt.xticks(rotation=45)
-plt.title('Total shampoo sales per month')
-plt.xlabel('Total Sales')
-plt.ylabel('Month')
-plt.tight_layout()
-rectangles[2].set_color('r')
-```
-
-
-![png](index_files/index_63_0.png)
-
 
 ## Histograms
 
-We will get get further into histograms in mod 2, but it is good to get familiar with them sooner rather than later. 
+We will get get further into histograms in phase 2, but it is good to get familiar with them sooner rather than later. 
 
 Histograms create uniform bins across the entire range of a continuous variable. They then count the number of data points which fall into each bin.  
 
@@ -740,6 +389,10 @@ Histograms are often confused with bar charts, since they look somewhat similar.
 
 
 ![histogram_ex](images/histogram_example.svg)
+
+Let's import some data from Divy Bikes, the bike sharing company currently in use in Chicago.
+
+![images](images/divy.jpeg)
 
 
 ```python
@@ -759,175 +412,40 @@ divy_trips = prep_divy()
 divy_trips.head()
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>ride_id</th>
-      <th>rideable_type</th>
-      <th>started_at</th>
-      <th>ended_at</th>
-      <th>start_station_name</th>
-      <th>start_station_id</th>
-      <th>end_station_name</th>
-      <th>end_station_id</th>
-      <th>start_lat</th>
-      <th>start_lng</th>
-      <th>end_lat</th>
-      <th>end_lng</th>
-      <th>member_casual</th>
-      <th>weekday</th>
-      <th>hour</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>EACB19130B0CDA4A</td>
-      <td>docked_bike</td>
-      <td>2020-01-21 20:06:59</td>
-      <td>2020-01-21 20:14:30</td>
-      <td>Western Ave &amp; Leland Ave</td>
-      <td>239</td>
-      <td>Clark St &amp; Leland Ave</td>
-      <td>326.0</td>
-      <td>41.9665</td>
-      <td>-87.6884</td>
-      <td>41.9671</td>
-      <td>-87.6674</td>
-      <td>member</td>
-      <td>2</td>
-      <td>20</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>8FED874C809DC021</td>
-      <td>docked_bike</td>
-      <td>2020-01-30 14:22:39</td>
-      <td>2020-01-30 14:26:22</td>
-      <td>Clark St &amp; Montrose Ave</td>
-      <td>234</td>
-      <td>Southport Ave &amp; Irving Park Rd</td>
-      <td>318.0</td>
-      <td>41.9616</td>
-      <td>-87.6660</td>
-      <td>41.9542</td>
-      <td>-87.6644</td>
-      <td>member</td>
-      <td>4</td>
-      <td>14</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>789F3C21E472CA96</td>
-      <td>docked_bike</td>
-      <td>2020-01-09 19:29:26</td>
-      <td>2020-01-09 19:32:17</td>
-      <td>Broadway &amp; Belmont Ave</td>
-      <td>296</td>
-      <td>Wilton Ave &amp; Belmont Ave</td>
-      <td>117.0</td>
-      <td>41.9401</td>
-      <td>-87.6455</td>
-      <td>41.9402</td>
-      <td>-87.6530</td>
-      <td>member</td>
-      <td>4</td>
-      <td>19</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>C9A388DAC6ABF313</td>
-      <td>docked_bike</td>
-      <td>2020-01-06 16:17:07</td>
-      <td>2020-01-06 16:25:56</td>
-      <td>Clark St &amp; Randolph St</td>
-      <td>51</td>
-      <td>Fairbanks Ct &amp; Grand Ave</td>
-      <td>24.0</td>
-      <td>41.8846</td>
-      <td>-87.6319</td>
-      <td>41.8918</td>
-      <td>-87.6206</td>
-      <td>member</td>
-      <td>1</td>
-      <td>16</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>943BC3CBECCFD662</td>
-      <td>docked_bike</td>
-      <td>2020-01-30 08:37:16</td>
-      <td>2020-01-30 08:42:48</td>
-      <td>Clinton St &amp; Lake St</td>
-      <td>66</td>
-      <td>Wells St &amp; Hubbard St</td>
-      <td>212.0</td>
-      <td>41.8856</td>
-      <td>-87.6418</td>
-      <td>41.8899</td>
-      <td>-87.6343</td>
-      <td>member</td>
-      <td>4</td>
-      <td>8</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
 Can we see a visual difference between in hourly ride count distributions between weekdays and weekends?
 
 
 
 ```python
-# Plot weekdays
+# Plot weekday ride distribution
 ```
 
 
 ```python
 weekday_divy = divy_trips[(divy_trips.weekday == 6) |(divy_trips.weekday == 7)]
-plt.hist(weekday_divy['hour'])
-plt.xlabel('Hour')
-plt.ylabel('Ride Count')
-plt.title('Ride Count Per Hour on Weekdays');
+
 ```
-
-
-![png](index_files/index_72_0.png)
-
 
 
 ```python
 # Plot Weekends
 weekend_divy = divy_trips[~(divy_trips.weekday == 6) |(divy_trips.weekday == 7)]
 
-plt.hist(weekend_divy['hour'])
-plt.xlabel('Hour of Day')
-plt.ylabel('Number of Total Daily Rides')
-plt.title('Ride Count Per Hour on Weekends');
+
 ```
 
+Let's use the plt.subplots() method to plot the weekdays and weekends side by side.
 
-![png](index_files/index_73_0.png)
+# Student Screen Share
+
+Let's use the plt.subplots() method to plot the weekday and weekend histograms side by side.
+
+I will ask for a volunteer to share their screen, and we will help them through.
+
+Here is some starter code
+
+`fig, (<fill_in>) = plt.subplots(<fill_in>, figsize=[10,5], sharey=<fill_in>)`
+`
 
 
 ## Layering
@@ -936,146 +454,12 @@ plt.title('Ride Count Per Hour on Weekends');
 
 If we want to add multiple plots on one axis, we can simply call the plotting functions one after the other. 
 
-
-```python
-plt.hist(weekday_divy['hour'], alpha=.5, normed=True, label='Weekday')
-plt.hist(weekend_divy['hour'], alpha=.5, normed=True, label='Weekend')
-plt.xlabel('Hour of Day')
-plt.ylabel('Fraction of Total Daily Rides')
-plt.legend();
-```
-
-    /Users/johnmaxbarry/.local/lib/python3.7/site-packages/ipykernel_launcher.py:1: MatplotlibDeprecationWarning: 
-    The 'normed' kwarg was deprecated in Matplotlib 2.1 and will be removed in 3.1. Use 'density' instead.
-      """Entry point for launching an IPython kernel.
-    /Users/johnmaxbarry/.local/lib/python3.7/site-packages/ipykernel_launcher.py:2: MatplotlibDeprecationWarning: 
-    The 'normed' kwarg was deprecated in Matplotlib 2.1 and will be removed in 3.1. Use 'density' instead.
-      
-
-
-
-![png](index_files/index_76_1.png)
-
-
-## Box Plots
-
-Box plots (or box-and-whisker plots), like histograms, show the distribution of a continous variable.  They have a median line, where half the data falls above, half below.  The box represents the interquartile range, and the whiskers encompass (most often) 95% of the data. We can detect skew from a boxplot, and it is also a quick way to see detect outliers.
-
-Again, we will get further into boxplots in mod 2.
-
-![boxplot](images/boxplot.png)
+Let's set the **normed** parameter to True, set **label** on each plot and call the legend, and set the opacity (**alpha**) to .5 so we can see the layering.
 
 
 ```python
-from sklearn.datasets import load_boston
-
-data = load_boston()
-
-# Median value of Boston homes (1978) in 1000's
-house_prices = data.target
-house_prices[:5]
-
+# Your code here
 ```
-
-
-
-
-    array([24. , 21.6, 34.7, 33.4, 36.2])
-
-
-
-
-```python
-plt.boxplot(house_prices)
-plt.ylabel("Housing Price ($1000s)");
-```
-
-
-![png](index_files/index_80_0.png)
-
-
-## Plotting Syntax
-
-- There are many different ways to create plots but we will strongly suggest using the subplots method  
-```fig, ax = plt.subplots()```  
-```fig, (ax_1, ax_2) = plt.subplots(1,2)```
-
-
-    - This is useful for extensibility 
-    - Gives you access to the figure and individual axis in a plot
-    - More fine grained control of customizing your plot
-    - Easily create additional axis on your figure
-    - This syntax is a good level of abstraction
-        - You can go deeper into the api but this should give you immediate access to most tools you will need for whatever plot you are making
-    - Flatiron Specific
-        - Plotting code will be more easily readable for other students and instructors
-        - You don’t need to remember many different ways to organize your code
-
-Here are links to the [matplotlib documentation](https://matplotlib.org/index.html) as well as the [Axes object documentation](https://matplotlib.org/api/axes_api.html):
-
-We will now walk through some common charts and their uses, while practicing our matplotlib syntax
-
-
-```python
-fig, ax = plt.subplots()
-ax.boxplot(house_prices)
-
-# The syntax is a bit different
-ax.set_ylabel("Housing Price ($1000s)");
-```
-
-
-![png](index_files/index_83_0.png)
-
-
-# Pair Programming 2:
-
-We want to display the boxplot and the histogram of the boston housing sales prices side by side.  
-To do so, we will us the plt.subplots() convention.  
-
-The cell below is missing the appropriate ax and fig variables, so it will not run.  
-
-In groups of two, take 3 minutes to add in the appropriate variables to make the cell function.
-
-
-```python
-
-fig, () = plt.subplots(1,2)
-set_figheight(7)
-set_figwidth(10)
-
-boxplot(house_prices)
-set_xlabel('House Price ($1000s)');
-set_ylabel('Count')
-set_title('Many Outliers in Boston House Prices')
-
-hist(house_prices)
-set_ylabel('Count')
-set_title('Distribution of Boston House Prices')
-
-plt.tight_layout()
-;
-```
-
-
-    ---------------------------------------------------------------------------
-
-    ValueError                                Traceback (most recent call last)
-
-    <ipython-input-197-55d79241047d> in <module>
-    ----> 1 fig, () = plt.subplots(1,2)
-          2 set_figheight(7)
-          3 set_figwidth(10)
-          4 
-          5 boxplot(house_prices)
-
-
-    ValueError: too many values to unpack (expected 0)
-
-
-
-![png](index_files/index_85_1.png)
-
 
 ### Quick note: style sheets are cool
 
@@ -1107,10 +491,6 @@ plt.show()
 # plt.savefig('path_to_figure_folder/.svg')
 ```
 
-
-![png](index_files/index_90_0.png)
-
-
 # Seaborn
 
 [Seaborn Gallery](https://seaborn.pydata.org/examples/index.html)
@@ -1137,48 +517,32 @@ sns.set(style='whitegrid')
 fig, ax = plt.subplots()
 
 X = height
-y = career_assts
-sns.scatterplot(X, y);
+y = career_assists
+sns.scatterplot(X, y, ax=ax);
 ```
-
-
-![png](index_files/index_93_0.png)
-
 
 
 ```python
-sns.regplot(X, y);
+fig, ax = plt.subplots(1,2, figsize=(10,5), sharey=True)
+sns.scatterplot(X, y, ax=ax[0])
+sns.regplot(X, y, ax=ax[1]);
 ```
 
-
-![png](index_files/index_94_0.png)
-
-
-## Violin Plot
+## Box and Violin Plots
 
 
 ```python
 
-fig, ax = plt.subplots()
+fig, ax = plt.subplots(2,3, figsize=(15,10))
 
-sns.violinplot(data=house_prices)
-ax.set_ylabel('House Price in 1000s');
+sns.distplot(weekday_divy.hour, ax=ax[0][0])
+sns.boxplot(weekday_divy.hour, ax=ax[1][0])
+sns.distplot(weekend_divy.hour, ax=ax[0][1])
+sns.boxplot(weekend_divy.hour, ax=ax[1][1])
+sns.distplot(weekend_divy.hour, ax=ax[0][2])
+sns.violinplot(weekend_divy.hour, ax=ax[1][2])
+
 ```
-
-
-![png](index_files/index_96_0.png)
-
-
-## Kernel Density Estimation Plot
-
-
-```python
-sns.kdeplot(weekday_divy['hour'], shade=True);
-```
-
-
-![png](index_files/index_98_0.png)
-
 
 
 ```python
@@ -1193,71 +557,9 @@ sns.pairplot(basketball_corr)
 ```
 
 
-
-
-    <seaborn.axisgrid.PairGrid at 0x1a2c1d6e48>
-
-
-
-
-![png](index_files/index_100_1.png)
-
-
-
 ```python
 basketball_corr.corr()
 ```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>salary</th>
-      <th>height_inches</th>
-      <th>career_AST</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>salary</th>
-      <td>1.000000</td>
-      <td>0.138771</td>
-      <td>0.227794</td>
-    </tr>
-    <tr>
-      <th>height_inches</th>
-      <td>0.138771</td>
-      <td>1.000000</td>
-      <td>-0.500143</td>
-    </tr>
-    <tr>
-      <th>career_AST</th>
-      <td>0.227794</td>
-      <td>-0.500143</td>
-      <td>1.000000</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
 
 
 ```python
