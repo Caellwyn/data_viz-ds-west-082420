@@ -10,9 +10,11 @@
     - Hist
 - Customize different aspects of a graph
     - labels (title, axis)
-    - Linestyle 
+    - Markers
     - Colors
+    - Hues
 - Create multiple graphs in one figure
+    - Explore fig, ax = plt.subplots() syntax
 
 
 # Activation Exercise
@@ -127,46 +129,58 @@ Let's import some NBA data, and use the matplotlib scatter plot to look at corre
 ### Is there a correlation between career points/game and average career salary?
 
 
-As we move into modeling, we will begin talking about the relationship of a target variable and a feature.  If we are predicting salary using a linear model, seeing strong positive correlation suggests that Points Per Game may be an important feature to include in our model.
-
-### Is there a correlation between height and career assists?
-
-# The graph above is missing a title and labels.  
-Let's work together to add labels using the methods reference in the link below.  
-Reference [this link](https://python-graph-gallery.com/4-add-title-and-axis-label/)
-
-We can also change [color](https://matplotlib.org/3.1.0/gallery/color/named_colors.html), opacity, marker size, and [marker symbol](https://matplotlib.org/3.2.1/api/markers_api.html).  
-Below, we have a list of parameters with incorrect values.  Place the values into the correct parameters to create a scatter plot of the correlation between "height" and "assists" with large red triangles sized according to player salary.
-
-# Pair Programming: 5 minutes
-Have a conversation with your partners and decide how to rearrange the variables into the correct pattern. Don't forget the labels.
-
 
 ```python
-
-a = height
-b = 100
-c = .2 
-d = 'red'
-e = 'pink' 
-f = '^'
-g = career_assts
-h = individual_players['salary']/20000
-
-plt.scatter(x=a , y=g, alpha=c, c=d, marker=f, s=h)
-
+plt.scatter(avg_pts, avg_salary, c='green')
+plt.xlabel('Average Pts per Game')
+plt.ylabel('Career Salary')
+plt.title('Positive Correlation Between\n Average Career Points and Salary');
 ```
 
 
+```python
+avg_pts_shorter = pts_v_salary['career_PTS'][1:]
+plt.scatter(avg_pts_shorter, avg_salary)
+
+# The error reads x ad y must be the same size.  Each array has to be of the same length, since each point has to have both and x and y position. 
+```
+
+Of the three students below, someone volunteer to read and interpret the error message.
 
 
-    <matplotlib.collections.PathCollection at 0x1a3ef5cb00>
+```python
+plt.scatter(avg_pts, avg_salary, c='green')
+plt.title('Positive Correlation Between\n Average Career Points and Salary');
+```
+
+As we move into modeling, we will begin talking about the relationship of a target variable and a feature.  If we are predicting salary using a linear model, seeing strong positive correlation suggests that Points Per Game may be an important feature to include in our model.
+
+# Pair Program: Let's explore the data and visualize a negative correlation
+
+### Is there a correlation between height and career assists?
+
+Take 7 minutes to plot the correlation between heigh and career assists.  The arrays are coded below.
+
+Get through as many of the tasks below as possible:
+
+  1. Plot a scatter plot visualizing the correlation of career assists and height.
+  2. Add an xlabel, ylabel, and title
+  3. Change the color to red
+  4. change the marker type to a '^'
+  5. Set the opacity to .2
+  6. Set the size of each marker to individual_players['salary']/20000
+  7. Using an f-string, add the magnetude of correlation to the plot. 
+  Code for correlation: `round(np.corrcoef(height, career_assts)[0,1], 4)`
+
+Remember you can view the documentation of scatter by placing your cursor between the parens and hitting shift-tab
 
 
-
-
-![png](index_files/index_33_1.png)
-
+```python
+plt.scatter(height, career_assists, c='red', marker='^', alpha=.2, s=individual_players['salary']/20000)
+plt.xlabel('Height in Inches')
+plt.ylabel('Career Assists')
+plt.title(f'Negative Correlation{round(np.corrcoef(height, career_assts)[0,1], 4)} between\n Height and Career assists');
+```
 
 ## Line Plot
 
@@ -174,24 +188,18 @@ Tracks the change of a single variable over time.  They are generally better tha
 
 Here is some code to read in some well worn shampoo sales data over a three year period.
 
-## The xticks are illegible in the plot above.
+The above plot shows an upward trend of sales across the years, and perhaps we can also see an increase in variance as well.
 
+That is a clear takeaway, but the x-axis is very messy.  
 
+Let's fix that together. 
 
-One way to combat that is to try rotating the ticks.  
-Use [this documentation](https://matplotlib.org/3.1.1/gallery/ticks_and_spines/ticklabels_rotation.html) to learn how to rotate.
-
-While you're at it, change the [linestyle](https://matplotlib.org/3.1.0/gallery/lines_bars_and_markers/linestyles.html).
-
-# Pair Programming # 1
-Now, in groups of 2, take 3 minutes to see if you can do better. Look into the xticks documentation further. Try to reduce the number of ticks to increase visability
-
-This can be tricky.  Don't get discouraged if you can't get it.
-
-**hint** here are then indexes for the xticks
+Here is the relevant [documentation](https://matplotlib.org/3.1.1/gallery/ticks_and_spines/ticklabels_rotation.html) to learn how to rotate xticks.
 
 
 ```python
+# Update the code below to rotate the xticks
+
 plt.plot(shampoo.Month, shampoo.iloc[:,1], color='g')
 plt.title('Shampoo Sales Across 3 Years')
 plt.xlabel('Year')
@@ -199,56 +207,13 @@ plt.ylabel('Total Sales')
 plt.xticks([13,25], ['Jan: Yr 2', 'Jan: Yr 3'], rotation=45);
 ```
 
-
-![png](index_files/index_38_0.png)
-
-
-## Bar charts
-
-Bar charts are everywhere: powerpoints, billboards and the evening news. They are used to show the relationship of a numerical and a categorical variable.
-
-For example, a bar chart can show the growth of a single categorical variable across time.
-
-
-
-The plot about is small. Adjust the figure size to make it bigger.
-Look at [this link](https://stackoverflow.com/questions/332289/how-do-you-change-the-size-of-figures-drawn-with-matplotlib)
-
-## Histograms
-
-We will get get further into histograms in mod 2, but it is good to get familiar with them sooner rather than later. 
-
-Histograms create uniform bins across the entire range of a continuous variable. They then count the number of data points which fall into each bin.  
-
-Histograms are often confused with bar charts, since they look somewhat similar.  The big difference, however, is that histograms visualize the distribution of a continuous variable, rather than the discrete variable shown by barcharts. You can remember this because the bins of histograms don't have spaces between them.
-
-
-
-![histogram_ex](images/histogram_example.svg)
-
-Can we see a visual difference between in hourly ride count distributions between weekdays and weekends?
-
-
-## Layering
-
-![cake](https://media.giphy.com/media/XMgCFjsCSARxK/giphy.gif)
-
-If we want to add multiple plots on one axis, we can simply call the plotting functions one after the other. 
-
-## Box Plots
-
-Box plots (or box-and-whisker plots), like histograms, show the distribution of a continous variable.  They have a median line, where half the data falls above, half below.  The box represents the interquartile range, and the whiskers encompass (most often) 95% of the data. We can detect skew from a boxplot, and it is also a quick way to see detect outliers.
-
-Again, we will get further into boxplots in mod 2.
-
-![boxplot](images/boxplot.png)
-
 ## Plotting Syntax
+
+Above, we used the plt.scatter()/plt.plot() syntax to make our graphs.  That was to ease us into a general comfort with matplotlib.  But there is a better way.
 
 - There are many different ways to create plots but we will strongly suggest using the subplots method  
 ```fig, ax = plt.subplots()```  
 ```fig, (ax_1, ax_2) = plt.subplots(1,2)```
-
 
     - This is useful for extensibility 
     - Gives you access to the figure and individual axis in a plot
@@ -262,46 +227,117 @@ Again, we will get further into boxplots in mod 2.
 
 Here are links to the [matplotlib documentation](https://matplotlib.org/index.html) as well as the [Axes object documentation](https://matplotlib.org/api/axes_api.html):
 
-We will now walk through some common charts and their uses, while practicing our matplotlib syntax
 
-# Pair Programming 2:
 
-We want to display the boxplot and the histogram of the boston housing sales prices side by side.  
-To do so, we will us the plt.subplots() convention.  
+From now on, I will use the plt.subplots() syntax, beginning with our barplots.
 
-The cell below is missing the appropriate ax and fig variables, so it will not run.  
+## Bar charts
 
-In groups of two, take 3 minutes to add in the appropriate variables to make the cell function.
+Bar charts are everywhere: powerpoints, billboards and the evening news. They are used to show the relationship of a numerical and a categorical variable.
+
+For example, a bar chart can show the growth of a single categorical variable across time.
+
+Let's sum the sales by month over the three years, and see if there is any monthly seasonality.
+
 
 
 ```python
-fig, (ax_1, ax_2) = plt.subplots(1,2)
-fig.set_figheight(7)
-fig.set_figwidth(10)
+fig, ax = plt.subplots(figsize=[15,10])
 
-ax_1.boxplot(house_prices)
-ax_1.set_xlabel('House Price ($1000s)');
-ax_1.set_ylabel('Count')
-ax_1.set_title('Many Outliers in Boston House Prices')
 
-ax_2.hist(house_prices)
-ax_2.set_ylabel('Count')
-ax_2.set_title('Distribution of Boston House Prices')
+ax.bar(x = month_numbers , height=sales_per_month)
 
-plt.tight_layout()
-;
+ax.set_xticklabels(labels=months_labels, rotation=45)
+ax.set_title('Total shampoo sales per month')
+ax.set_xlabel('Total Sales')
+ax.set_ylabel('Month')
+
+```
+
+## Histograms
+
+We will get get further into histograms in phase 2, but it is good to get familiar with them sooner rather than later. 
+
+Histograms create uniform bins across the entire range of a continuous variable. They then count the number of data points which fall into each bin.  
+
+Histograms are often confused with bar charts, since they look somewhat similar.  The big difference, however, is that histograms visualize the distribution of a continuous variable, rather than the discrete variable shown by barcharts. You can remember this because the bins of histograms don't have spaces between them.
+
+
+
+![histogram_ex](images/histogram_example.svg)
+
+Let's import some data from Divy Bikes, the bike sharing company currently in use in Chicago.
+
+![images](images/divy.jpeg)
+
+Can we see a visual difference between in hourly ride count distributions between weekdays and weekends?
+
+
+
+```python
+fig, ax = plt.subplots()
+ax.hist(weekday_divy['hour'])
+ax.set_xlabel('Hour')
+ax.set_ylabel('Ride Count')
+ax.set_title('Ride Count Per Hour on Weekdays');
 ```
 
 
+```python
+fig, ax = plt.subplots()
+ax.hist(weekday_divy['hour'])
+ax.set_xlabel('Hour')
+ax.set_ylabel('Ride Count')
+ax.set_title('Ride Count Per Hour on Weekdays');
+```
+
+Let's use the plt.subplots() method to plot the weekdays and weekends side by side.
+
+# Student Screen Share
+
+Let's use the plt.subplots() method to plot the weekday and weekend histograms side by side.
+
+I will ask for a volunteer to share their screen, and we will help them through.
+
+Here is some starter code
+
+`fig, (<fill_in>) = plt.subplots(<fill_in>, figsize=[10,5], sharey=<fill_in>)`
+`
 
 
-    ''
+
+```python
+
+fig, (ax1, ax2) = plt.subplots(1,2,figsize=[10,5], sharey=True, sharex=True)
+
+ax1.hist(weekday_divy['hour'])
+ax1.set_title('Weekday Divy Use by Hour')
+ax1.set_ylabel('Ride Count')
+ax2.hist(weekend_divy['hour'])
+ax2.set_title('Weekend Divy Use by Hour')
+fig.text(0.5, 0.04, 'Hour in Day', ha='center')
+
+;
+```
+
+## Layering
+
+![cake](https://media.giphy.com/media/XMgCFjsCSARxK/giphy.gif)
+
+If we want to add multiple plots on one axis, we can simply call the plotting functions one after the other. 
+
+Let's set the **normed** parameter to True, set **label** on each plot and call the legend, and set the opacity (**alpha**) to .5 so we can see the layering.
 
 
-
-
-![png](index_files/index_52_1.png)
-
+```python
+fig, ax = plt.subplots()
+ax.hist(weekday_divy['hour'], alpha=.5, normed=True, label='Weekday')
+ax.hist(weekend_divy['hour'], alpha=.5, normed=True, label='Weekend')
+ax.set_xlabel('Hour of Day')
+ax.set_ylabel('Fraction of Total Daily Rides')
+ax.set_title('Weekend Days have a much Larger Fraction\n of Rides in the Morning')
+ax.legend();
+```
 
 ### Quick note: style sheets are cool
 
@@ -321,6 +357,4 @@ Let's split the shampoo sales into years, and plot three line plots, one on top 
 
 Seaborn is a wrapper around matplotlib which provides a high-level interface for drawing attractive and informative statistical graphics
 
-## Violin Plot
-
-## Kernel Density Estimation Plot
+## Box and Violin Plots
