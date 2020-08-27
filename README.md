@@ -1,9 +1,8 @@
 
 # Data Visualization with Matplotlib and Seaborn
 
-### Agenda: 
-- Explain what types of graphs best convey specific relationships
-- Use the subplots syntax to create a graph
+- Discuss the importance of visualization 
+- Explore common plot types and their uses
     - Line
     - Bar
     - Scatter
@@ -16,34 +15,6 @@
 - Create multiple graphs in one figure
     - Explore fig, ax = plt.subplots() syntax
 
-
-# Activation Exercise
-
-Take 3 minutes in groups of 3 to think about what types of plots would be best to visualize the scenarios below.  
-Peruse some plot examples here for ideas:
-[Python Graphing Gallery](https://python-graph-gallery.com) or [Data Viz Project](https://datavizproject.com/)
-
-
-### Scenario 1: You would like to display counts of coffee shops in each Chicago zipcode?
-
-
-```python
- # what are some appropriate plots?
-```
-
-### Scenario 2: You would like to visualize the correllation between miles per gallon of a car and horsepower
-
-
-```python
-# what are some appropriate plots?
-```
-
-### Scenario 3: You would like to visualize the distribution of blood pressure readings of American males between 25 and 35
-
-
-```python
-# what are some appropriate plots?
-```
 
 ## Why Visualize Data?
 or why can’t we just hand someone a table of data?
