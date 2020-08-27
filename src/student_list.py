@@ -1,24 +1,8 @@
-student_list =['Ali Karimi',
-'Angelica D',
-'Elena  Okoneshnikova',
-'Hector Salgado',
-'Hunter Owen',
-'Jeff A',
-'Jonathan Hickey',
-'Josh Johnson',
-'Marcos Prestes Panyagua Fernandes',
-'Matthew Williamson',
-'Niraj Pandey',
-'Ozair Ahmed',
-'Paul Tanner',
-'Prabhakar Rangarao',
-'Prudhvi Nettem',
-'Rueben Kettel',
-'Ryan L Lewis',
-'Sam Dedes',
-'Sean Karasz',
-'Sindhu Ravikumar',
-'Vanessa Varagas',
- 'William Melville']
-
-student_first_names = [name.split(' ')[0] for name in student_list]
+student_first_names = [
+"Ali","Andrew","Angie","Elena",
+"Hunter","Jeffrey","Jonathan",
+"Josh","Karim","Matthew",
+"Ozair","Paul","Prabhakar",
+"Prudhvi","Reuben","Ryan",
+"Sam","Sean","Sindhu",
+"Sindhu","William"]
